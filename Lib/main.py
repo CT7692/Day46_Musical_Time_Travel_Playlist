@@ -4,6 +4,7 @@ from tkinter import messagebox
 from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
+from security import safe_requests
 
 
 FONT = "Arial"
@@ -40,7 +41,7 @@ def error_msg():
     month_input.focus()
 
 def get_songs(date):
-    response = requests.get(f"https://www.billboard.com/charts/hot-100/{date}")
+    response = safe_requests.get(f"https://www.billboard.com/charts/hot-100/{date}")
     soup = BeautifulSoup(response.text, "html.parser")
     first_song = soup.find(name="h3", class_="c-title a-no-trucate a-font-primary-bold-s "
                                              "u-letter-spacing-0021 u-font-size-23@tablet "
