@@ -34,7 +34,7 @@ class SpotifyDataOperations:
         playlist_create_endpoint = self.endpoint + f"users/{self.user}/playlists"
         playlist_params = self.get_playlist_params(date)
 
-        my_playlist = requests.post(url=playlist_create_endpoint, json=playlist_params, headers=self.header)
+        my_playlist = requests.post(url=playlist_create_endpoint, json=playlist_params, headers=self.header, timeout=60)
         my_playlist_json = my_playlist.json()
 
         my_playlist_id = my_playlist_json['id']
@@ -43,7 +43,7 @@ class SpotifyDataOperations:
         playlist_add_params = self.get_playlist_add_params(uri_list)
 
         playlist_reponse = requests.post(
-            url=playlist_add_endpoint, json=playlist_add_params, headers=self.header)
+            url=playlist_add_endpoint, json=playlist_add_params, headers=self.header, timeout=60)
         return playlist_reponse
 
 
